@@ -14,10 +14,17 @@ def analyze_sentiment(review):
     #       thought: [analysis]
     #       sentiment: [positive/negative]
     # 3. Includes the review text
-    prompt = """
-    # TODO: Add your prompt here
-    """
+    prompt = f"""
+    Please provide your thoughts of the movie review, indicating whether positive or negative.
+    
+    Review: {review}
+    
+    Your response should be in the listed format:
+    thought: Analyze the review and determine whether it is positive or negative.
+    sentiment: "positive" or "negative"
 
+    """
+    
     response = client.chat.completions.create(
         model="gpt-4o-mini-2024-07-18",
         messages=[{"role": "user", "content": prompt}],
@@ -25,13 +32,14 @@ def analyze_sentiment(review):
     )
 
     content = response.choices[0].message.content
-    # TODO: Parse the response to extract thought and sentiment
+    opinion = content.strip().split('sentiment:')
     # The response should be in the format:
     # thought: [analysis]
     # sentiment: [positive/negative]
     result = {
-        "thought": "",  # TODO: Extract thought
-        "sentiment": ""  # TODO: Extract sentiment
+        
+        "thought": opinion[0].replace("thought:", "").strip(),  
+        "sentiment": opinion[1]
     }
     
     return result
