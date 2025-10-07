@@ -8,7 +8,7 @@ def analyze_sentiment(review):
     Analyze the sentiment of a movie review using structured output.
     Returns a dictionary with 'thought' and 'sentiment' keys.
     """
-    # TODO: Create a prompt that:
+    #  Create a prompt that:
     # 1. Asks for sentiment analysis
     # 2. Specifies the required output format
     #       thought: [analysis]
